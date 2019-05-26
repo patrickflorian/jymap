@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@+id/titre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:text="MENU"
+        android:textColor="#4D626E"
+        android:textSize="28sp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/txtfor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/txttree"
+        android:layout_marginEnd="63dp"
+        android:text="User Add"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="63dp" />
+
+    <ImageView
+        android:id="@+id/txtuseradd"
+        android:layout_width="114dp"
+        android:layout_height="94dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/titre"
+        app:srcCompat="@drawable/map"
+        android:layout_toRightOf="@+id/titre" />
+
+    <TextView
+        android:id="@+id/txttree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="182dp"
+        android:layout_marginStart="57dp"
+        android:text="Custom Point"
+        android:layout_marginLeft="57dp"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:id="@+id/txtaddmap"
+        android:layout_width="114dp"
+        android:layout_height="94dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="54dp"
+        app:srcCompat="@drawable/map"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp" />
+
+    <TextView
+        android:id="@+id/txttwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtfor"
+        android:layout_alignTop="@+id/textone"
+        android:text="Show Map"
+        android:layout_alignLeft="@+id/txtfor" />
+
+    <ImageView
+        android:id="@+id/txtmodifmap"
+        android:layout_width="114dp"
+        android:layout_height="94dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/titre"
+        android:layout_toStartOf="@+id/titre"
+        app:srcCompat="@drawable/map" />
+
+    <TextView
+        android:id="@+id/textone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="156dp"
+        android:text="Add Point"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="73dp" />
+
+    <ImageView
+        android:id="@+id/txtmap"
+        android:layout_width="123dp"
+        android:layout_height="98dp"
+        android:layout_below="@+id/titre"
+        android:layout_toEndOf="@+id/titre"
+        app:srcCompat="@drawable/map"
+        android:layout_toRightOf="@+id/titre" />
+
+</RelativeLayout>
