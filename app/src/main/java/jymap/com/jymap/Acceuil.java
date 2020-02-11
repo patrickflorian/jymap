@@ -16,7 +16,7 @@ public class Acceuil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
 
-        btnRegister=(Button)findViewById(R.id.btnRegister);
+        /*btnRegister=(Button)findViewById(R.id.btnRegister);*/
         btnSign=(Button)findViewById(R.id.btnSign);
 
 
@@ -28,14 +28,14 @@ public class Acceuil extends AppCompatActivity {
             }
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+       /* btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent activiteregister = new Intent(Acceuil.this, Register.class);
                 startActivity(activiteregister);
                 }
-        });
+        });*/
         Log.e("AFFI","joel");
     }
 }

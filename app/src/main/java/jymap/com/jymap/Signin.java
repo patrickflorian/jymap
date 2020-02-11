@@ -21,7 +21,7 @@ public class Signin extends AppCompatActivity {
     EditText editPassword, editName;
     Button btnSignin, btnRegister;
 
-    static String URL= "http://192.168.43.210//test_android/index.php";
+    static String URL= "https://pfem1uds.herokuapp.com/api/login";
 
     JSONParser jsonParser=new JSONParser();
 
@@ -34,7 +34,7 @@ public class Signin extends AppCompatActivity {
         editPassword=(EditText) findViewById(R.id.editPassword);
 
         btnSignin=(Button) findViewById(R.id.btnSignin);
-        btnRegister=(Button) findViewById(R.id.btnRegister);
+        /*btnRegister=(Button) findViewById(R.id.btnRegister);*/
 
 
         btnSignin.setOnClickListener(new View.OnClickListener() {
@@ -43,16 +43,18 @@ public class Signin extends AppCompatActivity {
                AttemptLogin attemptLogin= new AttemptLogin();
                 attemptLogin.execute(editName.getText().toString(),editPassword.getText().toString());
 
+                editPassword.setText("");
+                editPassword.requestFocus();
             }
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        /*btnRegister.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  Intent activiteregister = new Intent(Signin.this,Register.class);
                  startActivity(activiteregister);
              }
-         });
+         });*/
     }
 
 
@@ -73,7 +75,7 @@ public class Signin extends AppCompatActivity {
             String username= args[0];
 
             ArrayList params = new ArrayList();
-            params.add(new BasicNameValuePair("username", username));
+            params.add(new BasicNameValuePair("email", username));
             params.add(new BasicNameValuePair("password", password));
             Log.e("params",params.toString());
             JSONObject json = jsonParser.makeHttpRequest(URL, "POST", params);
@@ -90,15 +92,21 @@ public class Signin extends AppCompatActivity {
             //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
 
             try {
-                if (result != null) {
-                    Log.e("ERROR", result.getString("message"));
-                   /* Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_LONG);**/
+                if (result!=null) {
+                    /*Log.e("ERROR", result.getString("message"));
+                   *//* Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_LONG);**//*
                     Toast.makeText(getApplicationContext(),result.getString("message"),Toast.LENGTH_LONG).show();
                     if(result.getString("message").equals("Successfully logged in")){
 
-                        Intent activitemenu = new Intent(Signin.this,Menu.class);
-                        startActivity(activitemenu);
-                    }
+                        Intent registerpoint = new Intent(Signin.this,Localisation.class);
+                        startActivity(registerpoint);
+                    }*/
+                    Log.d("Sign IN : ", "onPostExecute: "+result);
+                    Toast.makeText(getApplicationContext(),"Succssfully logged in",Toast.LENGTH_LONG).show();
+                    if (result.getString("id") != null){
+                        Intent registerpoint = new Intent(Signin.this,Localisation.class);
+                        startActivity(registerpoint);
+                    }else Toast.makeText(getApplicationContext(), "Uncorrect username or password", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();
                 }

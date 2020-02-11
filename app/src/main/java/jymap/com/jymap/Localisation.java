@@ -22,6 +22,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 public class Localisation extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class Localisation extends AppCompatActivity {
     EditText txtCity, txtNamepoint;
     Button btnRegisterpoint, btnShowmap;
     Double Latitude, Longitude;
-    static String URL = "http://192.168.95.1/test_android/savelocalisation.php";
+    static String URL = "https://pfem1uds.herokuapp.com/api/location";
 
     JSONParser jsonParser = new JSONParser();
 
@@ -41,15 +42,28 @@ public class Localisation extends AppCompatActivity {
         txtCity=(EditText)findViewById(R.id.txtCity);
         txtNamepoint=(EditText)findViewById(R.id.txtNamepoint);
         btnRegisterpoint=(Button)findViewById(R.id.btnRegisterpoint);
-        btnShowmap=(Button)findViewById(R.id.btnShowmap);
+        /*btnShowmap=(Button)findViewById(R.id.btnShowmap);*/
 
         btnRegisterpoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Location locm = getPosition();
+                Location loc = getPosition();
+                if (loc == null) {
+                    Toast.makeText(Localisation.this,"erreur de recuperaton",Toast.LENGTH_SHORT).show();
+                    Log.d("LocalisationActivity", "onClick: impossible de recuperer votre position");
+                }else{
+                    Toast.makeText(getApplicationContext(),"Successfully Register",Toast.LENGTH_LONG).show();
                 AttemptRegister attemptRegister = new AttemptRegister();
-               attemptRegister.execute(txtCity.getText().toString(),txtNamepoint.getText().toString(),12.76+"",12.32+"");
+                attemptRegister.execute(txtCity.getText().toString(),txtNamepoint.getText().toString(),String.valueOf(loc.getLongitude()),String.valueOf(loc.getLatitude()));
             }
+                txtCity.setText("");
+                txtCity.requestFocus();
+
+                txtNamepoint.setText("");
+                txtNamepoint.requestFocus();
+
+        }
+
         });
 
 
@@ -85,7 +99,7 @@ public class Localisation extends AppCompatActivity {
             });
             loc = lm.getLastKnownLocation("gps");
             if (loc == null) {
-                loc = lm.getLastKnownLocation("network");
+                    loc = lm.getLastKnownLocation("network");
             }
             return  loc;
         }catch(SecurityException e){
@@ -121,10 +135,12 @@ public class Localisation extends AppCompatActivity {
 
 
             ArrayList params = new ArrayList();
-            params.add(new BasicNameValuePair("txtCity", txtCity));
-            params.add(new BasicNameValuePair("txtNamepoint", txtNamepoint));
-            params.add(new BasicNameValuePair("Longitude", Longitude));
-            params.add(new BasicNameValuePair("Latitude", Latitude));
+            JSONObject location = new  JSONObject();
+
+            params.add(new BasicNameValuePair("longitude", Longitude));
+            params.add(new BasicNameValuePair("latitude", Latitude));
+            params.add(new BasicNameValuePair("description", txtNamepoint));
+            params.add(new BasicNameValuePair("classroom", txtCity));
 
             JSONObject json = jsonParser.makeHttpRequest(URL, "POST", params);
 
@@ -142,7 +158,7 @@ public class Localisation extends AppCompatActivity {
             try {
                 if (result != null) {
                     Log.e("ERROR", result.getString("message"));
-                     Toast.makeText(getApplicationContext(),"Successfully logged in",Toast.LENGTH_LONG);
+                     Toast.makeText(getApplicationContext(),"Enregistrement Reussis",Toast.LENGTH_LONG).show();
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Unable to retrieve any data from server", Toast.LENGTH_LONG).show();

@@ -1,6 +1,7 @@
 package jymap.com.jymap;
 
 
+import android.preference.PreferenceActivity;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -12,6 +13,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JSONParser {
 
@@ -55,9 +59,12 @@ public class JSONParser {
                 // defaultHttpClient
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(url);
+
                 httpPost.setEntity(new UrlEncodedFormEntity(params));
+
                 try {
-                    Log.e("API123", " " +convertStreamToString(httpPost.getEntity().getContent()));
+
+                    Log.e("with params", " " +convertStreamToString(httpPost.getEntity().getContent()));
                     Log.e("API123",httpPost.getURI().toString());
                 } catch (Exception e) {
                     Log.e("exception 1",e.getMessage());

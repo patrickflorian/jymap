@@ -23,7 +23,7 @@ public class Register extends AppCompatActivity {
     EditText editEmail, editPassword, editName;
     Button btnRegister, btnSignin ;
 
-    static String URL= "http://10.0.2.2/test_android/index.php";
+    static String URL= "http://192.168.8.100/test_android/index.php";
     /*static String URL= "http://1ocalhost/test_android/index.php";**/
 
     JSONParser jsonParser=new JSONParser();
